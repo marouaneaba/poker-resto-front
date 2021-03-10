@@ -1,13 +1,13 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { PokerBarHomeComponent } from './container';
+import {PokerBarHomeComponent} from './container/poker-bar-home/poker-bar-home.component';
 
 const routes: Routes = [
-  { path: '/', component: PokerBarHomeComponent }
+  { path: '', component: PokerBarHomeComponent },
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [ RouterModule.forChild(routes)],
   exports: [RouterModule]
 })
 export class PokerBarHomeRoutingModule { }
