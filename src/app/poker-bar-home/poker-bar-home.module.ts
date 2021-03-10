@@ -1,17 +1,16 @@
-import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { AppRoutingModule } from '../core/containers/app-routing.module';
-
-import * as PokerBarHomeContainer from './container';
+import {PokerBarHomeRoutingModule} from './poker-bar-home-routing.module';
+import {PokerBarHomeComponent} from './container/poker-bar-home/poker-bar-home.component';
+import {NavBarComponent} from '../common/components/nav-bar/nav-bar.component';
 
 
 @NgModule({
-  declarations: [ ...PokerBarHomeContainer.container ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule
+  declarations: [
+    PokerBarHomeComponent,
+    NavBarComponent
   ],
-  providers: [],
-  bootstrap: []
+  imports: [PokerBarHomeRoutingModule],
+  providers: []
 })
 export class PokerBarHomeModule { }

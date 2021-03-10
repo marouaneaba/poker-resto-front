@@ -1,0 +1,28 @@
+{
+  "product": [
+    {
+      "id": 1,
+      "name": "name_test-1",
+      "price": 1000,
+      "quantity": 20,
+      "available": true,
+      "selected": false
+    },
+    {
+      "id": 2,
+      "name": "name_test-2",
+      "price": 500,
+      "quantity": 10,
+      "available": true,
+      "selected": false
+    },
+    {
+      "id": 3,
+      "name": "name_test-3",
+      "price": 50145,
+      "quantity": 0,
+      "available": true,
+      "selected": false
+    }
+  ]
+}
