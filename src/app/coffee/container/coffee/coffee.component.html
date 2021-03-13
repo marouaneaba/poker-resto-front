@@ -1,0 +1,57 @@
+<nav class="navbar navbar-light bg-light">
+  <ul class="form-inline">
+    <button class="btn btn-sm btn-outline-dark ml-2" type="button" (click)="onGetCoffees()">All</button>
+    <button class="btn btn-sm btn-outline-dark ml-2" type="button" (click)="onGetSelectedCoffee()">Selected</button>
+    <button class="btn btn-sm btn-outline-dark ml-2" type="button" (click)="onGetAvailableCoffee()">Available</button>
+  </ul>
+
+  <ul class="navbar navbar-nav ml-auto">
+    <li>
+      <form #formInput="ngForm" class="form-inline" (ngSubmit)="onSearchCoffeeByName(formInput)">
+        <input ngModel name="keyWord" class="form-control" type="text" placeholder="Saisie votre texte">
+        <button class="btn btn-sm btn-outline-dark ml-2">
+          <span class="fa fa-search"></span>
+        </button>
+      </form>
+    </li>
+  </ul>
+</nav>
+  <ul><div class="container">
+    <ng-container class="container" *ngIf="(coffees$ | async) as coffee" [ngSwitch]="coffee.dataState">
+      <ng-container class="alert-info" *ngSwitchCase="dataStateEnum.LOADING">
+        Loading ...
+      </ng-container>
+      <ng-container class="alert-danger" *ngSwitchCase="dataStateEnum.ERROR">
+        {{coffee.errorMessage}}
+      </ng-container>
+      <ng-container *ngSwitchCase="dataStateEnum.LOADED">
+        <table class="table container-sm">
+          <tr>
+            <th>name</th>
+            <th>price</th>
+            <th>quantity</th>
+            <th>selected</th>
+            <th>available</th>
+          </tr>
+          <tr *ngFor="let coffee of coffee.data">
+            <td>{{coffee.name}}</td>
+            <td>{{coffee.price}}</td>
+            <td>{{coffee.quantity}}</td>
+            <td>{{coffee.selected}}</td>
+            <td>{{coffee.available}}</td>
+            <td>
+              <button (click)="onSelect(coffee)" [ngClass]="coffee.selected?'btn-success':'btn-info'"  class="btn btn-sm">
+                <span *ngIf="coffee.selected">UnSelect</span>
+                <span *ngIf="!coffee.selected">Select</span>
+              </button>
+            </td>
+            <td>
+              <button class="btn btn-sm btn-danger" (click)="onAlertAndDeleteCoffee(coffee)">Delete
+                <span class="fa fa-trash-o"></span>
+              </button>
+            </td>
+          </tr>
+        </table>
+      </ng-container>
+    </ng-container>
+  </div></ul>
