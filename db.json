@@ -1,5 +1,5 @@
 {
-  "product": [
+  "coffee": [
     {
       "id": 1,
       "name": "name_test-1",
@@ -11,18 +11,18 @@
     {
       "id": 2,
       "name": "name_test-2",
-      "price": 500,
-      "quantity": 10,
-      "available": true,
+      "price": 1000,
+      "quantity": 20,
+      "available": false,
       "selected": false
     },
     {
       "id": 3,
-      "name": "name_test-3",
-      "price": 50145,
-      "quantity": 0,
-      "available": true,
-      "selected": false
+      "name": "name_test-13",
+      "price": 1000,
+      "quantity": 20,
+      "available": false,
+      "selected": true
     }
   ]
 }
