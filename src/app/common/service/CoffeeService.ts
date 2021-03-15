@@ -48,9 +48,24 @@ export class CoffeeService {
       .delete(`${environment.host}/Coffee/${coffee.id}`)
   }
 
+  public createCoffe(dataForm: any) {
+    console.log(dataForm);
+    return this.httpClient
+      .post(`${environment.host}/Coffee/`,dataForm)
+  }
+
   public getCoffeeSelectReverse(coffee: Coffee): Coffee{
     coffee.selected = !coffee.selected
     return coffee
   }
 
+  public getCoffeeById(id: number): Observable<Coffee>{
+    return this.httpClient
+      .get<Coffee>(`${environment.host}/Coffee/${id}`)
+  }
+
+  public saveCoffee(coffee: Coffee): Observable<Coffee> {
+    return this.httpClient
+      .put<Coffee>(`${environment.host}/Coffee/${coffee.id}`,coffee)
+  }
 }

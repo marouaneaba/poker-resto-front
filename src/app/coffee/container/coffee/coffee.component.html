@@ -3,6 +3,7 @@
     <button class="btn btn-sm btn-outline-dark ml-2" type="button" (click)="onGetCoffees()">All</button>
     <button class="btn btn-sm btn-outline-dark ml-2" type="button" (click)="onGetSelectedCoffee()">Selected</button>
     <button class="btn btn-sm btn-outline-dark ml-2" type="button" (click)="onGetAvailableCoffee()">Available</button>
+    <a class="btn btn-sm btn-outline-dark ml-2" routerLink="/coffee/newCoffee">New</a>
   </ul>
 
   <ul class="navbar navbar-nav ml-auto">
@@ -16,6 +17,34 @@
     </li>
   </ul>
 </nav>
+<!-- <div *ngIf="(coffees$ | async) as coffee" [ngSwitch]="coffee.dataState">
+  <div class="row ml-2">
+    <div *ngFor="let coffee of coffee.data">
+      <div class="col-sm-12 ml-2 mr-2 mt-2 mb-2">
+        <div class="card">
+          <img src="assets/images/b43fxbzyppn41.jpeg" id="imgCard" alt="Card image cap" class="img-fluid img-thumbnail">
+          <div class="card-body">
+            <h5 class="card-title">{{coffee.name}}</h5>
+            <p>{{coffee.price}}</p>
+            <td class="">
+              <button (click)="onSelect(coffee)" [ngClass]="coffee.selected?'btn-success':'btn-info'"  class="btn btn-sm mr-5">
+                <span *ngIf="coffee.selected">UnSelect</span>
+                <span *ngIf="!coffee.selected">Select</span>
+              </button>
+            </td>
+            <td>
+              <button class="btn btn-sm btn-danger" (click)="onAlertAndDeleteCoffee(coffee)">
+                <span class="fa fa-trash-o"></span>
+              </button>
+            </td>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div> -->
+
+
   <ul><div class="container">
     <ng-container class="container" *ngIf="(coffees$ | async) as coffee" [ngSwitch]="coffee.dataState">
       <ng-container class="alert-info" *ngSwitchCase="dataStateEnum.LOADING">
@@ -46,8 +75,13 @@
               </button>
             </td>
             <td>
-              <button class="btn btn-sm btn-danger" (click)="onAlertAndDeleteCoffee(coffee)">Delete
+              <button class="btn btn-sm btn-danger" (click)="onAlertAndDeleteCoffee(coffee)">
                 <span class="fa fa-trash-o"></span>
+              </button>
+            </td>
+            <td>
+              <button class="btn btn-sm btn-outline-info" (click)="onNavigateEditCoffee(coffee)">
+                <span class="fa fa-pencil"></span>
               </button>
             </td>
           </tr>

@@ -2,6 +2,6 @@ import {PokerBarHomeComponent} from './poker-resto-home/poker-restaurant-home.co
 /*
 export const container = [PokerBarHomeComponent];
 
-export * from './poker-resto-home/poker-resto-home.component';
+export * from './poker-resto-home/poker-resto-home.components';
 
  */

@@ -4,6 +4,8 @@ import {Observable, of} from 'rxjs';
 import {catchError, map, startWith} from "rxjs/operators";
 import {AppDataState, DataStateEnum} from "../../../common/state/data.state";
 import {Coffee} from "../../model/coffee.model";
+import {Router} from "@angular/router";
+import {environment} from "../../../../environments/environment";
 
 @Component({
   selector: 'app-coffee',
@@ -15,9 +17,17 @@ export class CoffeeComponent implements OnInit {
   public coffees$: Observable<AppDataState<Coffee[]>>;
   readonly dataStateEnum = DataStateEnum
 
-  constructor(private coffeeService: CoffeeService) {}
+  constructor(private coffeeService: CoffeeService, private router: Router) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.coffees$ = this.coffeeService
+      .getCoffees()
+      .pipe(
+        map(data=> ({dataState: DataStateEnum.LOADED, data: data})),
+        startWith({dataState:DataStateEnum.LOADING}),
+        catchError(err => of({dataState:DataStateEnum.ERROR,errorMessage: err.message}))
+      );
+  }
 
   public onGetCoffees(){
     this.coffees$ = this.coffeeService
@@ -80,5 +90,13 @@ export class CoffeeComponent implements OnInit {
       .subscribe(
         data => {this.onGetCoffees()},
         err => {console.log("Error", err)})
+  }
+
+  onNewCoffee() {
+    this.router.navigateByUrl("/newCoffee")
+  }
+
+  onNavigateEditCoffee(coffee: Coffee) {
+    this.router.navigateByUrl(`/coffee/editCoffee/${coffee.id}`)
   }
 }
