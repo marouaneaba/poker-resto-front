@@ -5,11 +5,15 @@ import { AppComponent } from './app/app.component';
 import {HttpClientModule} from '@angular/common/http';
 import {NavBarComponent} from "../../common/components/nav-bar/nav-bar.component";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
+import {HeaderComponent} from "../../common/components/header/header.component";
+import {FooterComponent} from "../../common/components/footer/footer.component";
 
 @NgModule({
   declarations: [
     AppComponent,
-    NavBarComponent
+    NavBarComponent,
+    HeaderComponent,
+    FooterComponent
   ],
   imports: [
     BrowserModule,
