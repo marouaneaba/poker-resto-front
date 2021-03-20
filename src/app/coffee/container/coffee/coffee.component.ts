@@ -29,6 +29,29 @@ export class CoffeeComponent implements OnInit {
       );
   }
 
+  onSelect(coffee: Coffee) {
+    this.coffeeService
+      .selectCoffee(coffee)
+      .subscribe(data => {
+        coffee.selected= data.selected;
+      })
+  }
+
+  onAlertAndDeleteCoffee(coffee: Coffee) {
+    const response: boolean = confirm('Etes-vous sùr vouloire supprimer?');
+    if(response){
+      this.onDeleteCoffee(coffee);
+    }
+  }
+
+  public onDeleteCoffee(coffee: Coffee) {
+    this.coffeeService
+      .deleteCoffee(coffee)
+      .subscribe(
+        data => {this.onGetCoffees()},
+        err => {console.log("Error", err)})
+  }
+
   public onGetCoffees(){
     this.coffees$ = this.coffeeService
       .getCoffees()
@@ -36,7 +59,7 @@ export class CoffeeComponent implements OnInit {
         map(data=> ({dataState: DataStateEnum.LOADED, data: data})),
         startWith({dataState:DataStateEnum.LOADING}),
         catchError(err => of({dataState:DataStateEnum.ERROR,errorMessage: err.message}))
-        );
+      );
   }
 
   public onGetSelectedCoffee() {
@@ -59,37 +82,15 @@ export class CoffeeComponent implements OnInit {
       );
   }
 
-  onSearchCoffeeByName(dataForm: any) {
+  onSearchCoffeeByName($event: any) {
+    console.log($event.keyWord);
     this.coffees$ = this.coffeeService
-      .searchCoffeeByName(dataForm.value.keyWord)
+      .searchCoffeeByName($event.KeyWordSearch)
       .pipe(
         map(data => ({dataState: DataStateEnum.LOADED, data: data})),
         startWith({dataState: DataStateEnum.LOADING}),
         catchError(err => of({dataState: DataStateEnum.ERROR, errorMessage:err.message}))
       );
-  }
-
-  onSelect(coffee: Coffee) {
-    this.coffeeService
-      .selectCoffee(coffee)
-      .subscribe(data => {
-        coffee.selected= data.selected;
-      })
-  }
-
-  onAlertAndDeleteCoffee(coffee: Coffee) {
-    const response: boolean = confirm('Etes-vous sùr vouloire supprimer?');
-    if(response){
-      this.onDeleteCoffee(coffee);
-    }
-  }
-
-  public onDeleteCoffee(coffee: Coffee) {
-    this.coffeeService
-      .deleteCoffee(coffee)
-      .subscribe(
-        data => {this.onGetCoffees()},
-        err => {console.log("Error", err)})
   }
 
   onNewCoffee() {
