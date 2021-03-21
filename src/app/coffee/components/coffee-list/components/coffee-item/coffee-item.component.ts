@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {Coffee} from "../../../../model/coffee.model";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-coffee-item',
@@ -7,9 +9,28 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CoffeeItemComponent implements OnInit {
 
-  constructor() { }
+  @Input()
+  coffee: Coffee;
+  @Output()
+  selectCoffee: EventEmitter<Coffee> = new EventEmitter<Coffee>();
+  @Output()
+  alertAndDeleteCoffee: EventEmitter<Coffee> = new EventEmitter<Coffee>();
 
-  ngOnInit(): void {
+  constructor(private router: Router) { }
+
+  ngOnInit(): void {}
+
+  onSelect(coffee: Coffee) {
+    this.selectCoffee
+      .emit(coffee);
   }
 
+  onAlertAndDeleteCoffee(coffee: Coffee) {
+    this.alertAndDeleteCoffee
+      .emit(coffee);
+  }
+
+  onNavigateEditCoffee(coffee: Coffee) {
+    this.router.navigateByUrl(`/coffee/editCoffee/${coffee.id}`)
+  }
 }

@@ -21,8 +21,7 @@ export class CoffeeListComponent implements OnInit {
   public coffeeDelete: EventEmitter<Coffee> = new EventEmitter<Coffee>();
   readonly dataStateEnum = DataStateEnum
 
-  constructor(private coffeeService: CoffeeService,
-              private router: Router) {}
+  constructor() {}
 
   ngOnInit(): void {}
 
@@ -41,9 +40,5 @@ export class CoffeeListComponent implements OnInit {
   public onDeleteCoffee(coffee: Coffee) {
     this.coffeeDelete
       .emit(coffee);
-  }
-
-  onNavigateEditCoffee(coffee: Coffee) {
-    this.router.navigateByUrl(`/coffee/editCoffee/${coffee.id}`)
   }
 }
