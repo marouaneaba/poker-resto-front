@@ -1,8 +1,8 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {Observable, of} from "rxjs";
-import {AppDataState, DataStateEnum} from "../../../common/state/data.state";
-import {Coffee, CoffeePayloadEvent} from "../../model/coffee.model";
-import {CoffeeService} from "../../../common/service/CoffeeService";
+import {AppDataState, DataStateEnum} from "../../../../common/state/data.state";
+import {Coffee, CoffeePayloadEvent} from "../../../model/coffee.model";
+import {CoffeeService} from "../../../../common/service/CoffeeService";
 import {Router} from "@angular/router";
 import {catchError, map, startWith} from "rxjs/operators";
 

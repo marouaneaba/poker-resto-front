@@ -6,7 +6,8 @@ import { CoffeeAddComponent } from './components/coffee-add/coffee-add.component
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import { CoffeeEditComponent } from './components/coffee-edit/coffee-edit.component';
 import { NavBarCoffeeComponent } from './components/nav-bar-coffee/nav-bar-coffee.component';
-import { CoffeeListComponent } from './components/coffee-list/coffee-list.component';
+import { CoffeeListComponent } from './components/coffee-list/container/coffee-list.component';
+import { CoffeeItemComponent } from './components/coffee-list/components/coffee-item/coffee-item.component';
 
 
 
@@ -17,7 +18,8 @@ import { CoffeeListComponent } from './components/coffee-list/coffee-list.compon
     CoffeeAddComponent,
     CoffeeEditComponent,
     NavBarCoffeeComponent,
-    CoffeeListComponent
+    CoffeeListComponent,
+    CoffeeItemComponent
   ],
   imports: [
     CoffeeRoutingModule,
