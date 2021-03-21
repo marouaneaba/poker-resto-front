@@ -4,47 +4,8 @@
   (getAvailableCoffee)="onGetAvailableCoffee()"
   (searchCoffeeByName)="onSearchCoffeeByName($event)">
 </app-nav-bar-coffee>
-  <ul><div class="container">
-    <ng-container class="container" *ngIf="(coffees$ | async) as coffee" [ngSwitch]="coffee.dataState">
-      <ng-container class="alert-info" *ngSwitchCase="dataStateEnum.LOADING">
-        Loading ...
-      </ng-container>
-      <ng-container class="alert-danger" *ngSwitchCase="dataStateEnum.ERROR">
-        {{coffee.errorMessage}}
-      </ng-container>
-      <ng-container *ngSwitchCase="dataStateEnum.LOADED">
-        <table class="table container-sm">
-          <tr>
-            <th>name</th>
-            <th>price</th>
-            <th>quantity</th>
-            <th>selected</th>
-            <th>available</th>
-          </tr>
-          <tr *ngFor="let coffee of coffee.data">
-            <td>{{coffee.name}}</td>
-            <td>{{coffee.price}}</td>
-            <td>{{coffee.quantity}}</td>
-            <td>{{coffee.selected}}</td>
-            <td>{{coffee.available}}</td>
-            <td>
-              <button (click)="onSelect(coffee)" [ngClass]="coffee.selected?'btn-success':'btn-info'"  class="btn btn-sm">
-                <span *ngIf="coffee.selected">UnSelect</span>
-                <span *ngIf="!coffee.selected">Select</span>
-              </button>
-            </td>
-            <td>
-              <button class="btn btn-sm btn-danger" (click)="onAlertAndDeleteCoffee(coffee)">
-                <span class="fa fa-trash-o"></span>
-              </button>
-            </td>
-            <td>
-              <button class="btn btn-sm btn-outline-info" (click)="onNavigateEditCoffee(coffee)">
-                <span class="fa fa-pencil"></span>
-              </button>
-            </td>
-          </tr>
-        </table>
-      </ng-container>
-    </ng-container>
-  </div></ul>
+<app-coffee-list
+  [coffees$]="coffees$"
+  (coffeeSelect)="onSelect($event)"
+  (coffeeDelete)="onDeleteCoffee($event)">
+</app-coffee-list>

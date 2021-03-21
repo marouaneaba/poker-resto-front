@@ -5,7 +5,6 @@ import {catchError, map, startWith} from "rxjs/operators";
 import {AppDataState, DataStateEnum} from "../../../common/state/data.state";
 import {Coffee} from "../../model/coffee.model";
 import {Router} from "@angular/router";
-import {environment} from "../../../../environments/environment";
 
 @Component({
   selector: 'app-coffee',
@@ -15,7 +14,6 @@ import {environment} from "../../../../environments/environment";
 export class CoffeeComponent implements OnInit {
 
   public coffees$: Observable<AppDataState<Coffee[]>>;
-  readonly dataStateEnum = DataStateEnum
 
   constructor(private coffeeService: CoffeeService, private router: Router) {}
 
@@ -27,29 +25,6 @@ export class CoffeeComponent implements OnInit {
         startWith({dataState:DataStateEnum.LOADING}),
         catchError(err => of({dataState:DataStateEnum.ERROR,errorMessage: err.message}))
       );
-  }
-
-  onSelect(coffee: Coffee) {
-    this.coffeeService
-      .selectCoffee(coffee)
-      .subscribe(data => {
-        coffee.selected= data.selected;
-      })
-  }
-
-  onAlertAndDeleteCoffee(coffee: Coffee) {
-    const response: boolean = confirm('Etes-vous sùr vouloire supprimer?');
-    if(response){
-      this.onDeleteCoffee(coffee);
-    }
-  }
-
-  public onDeleteCoffee(coffee: Coffee) {
-    this.coffeeService
-      .deleteCoffee(coffee)
-      .subscribe(
-        data => {this.onGetCoffees()},
-        err => {console.log("Error", err)})
   }
 
   public onGetCoffees(){
@@ -93,11 +68,20 @@ export class CoffeeComponent implements OnInit {
       );
   }
 
-  onNewCoffee() {
-    this.router.navigateByUrl("/newCoffee")
+  onSelect(coffee: Coffee) {
+    this.coffeeService
+      .selectCoffee(coffee)
+      .subscribe(
+        data => {
+          coffee.selected= data.selected;
+        });
   }
 
-  onNavigateEditCoffee(coffee: Coffee) {
-    this.router.navigateByUrl(`/coffee/editCoffee/${coffee.id}`)
+  public onDeleteCoffee(coffee: Coffee) {
+    this.coffeeService
+      .deleteCoffee(coffee)
+      .subscribe(
+        data => {this.onGetCoffees()},
+        err => {console.log("Error", err)})
   }
 }

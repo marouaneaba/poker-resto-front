@@ -3,7 +3,7 @@ import {CoffeeService} from "../../../common/service/CoffeeService";
 import {catchError, map, startWith} from "rxjs/operators";
 import {AppDataState, DataStateEnum} from "../../../common/state/data.state";
 import {Observable, of} from "rxjs";
-import {Coffee, CoffePayloadEvent} from "../../model/coffee.model";
+import {Coffee, CoffeePayloadEvent} from "../../model/coffee.model";
 
 @Component({
   selector: 'app-nav-bar-coffee',
@@ -19,7 +19,7 @@ export class NavBarCoffeeComponent implements OnInit {
   @Output()
   getAvailableCoffee: EventEmitter<any> = new EventEmitter<any>();
   @Output()
-  searchCoffeeByName: EventEmitter<CoffePayloadEvent> = new EventEmitter<CoffePayloadEvent>();
+  searchCoffeeByName: EventEmitter<CoffeePayloadEvent> = new EventEmitter<CoffeePayloadEvent>();
 
   constructor(private coffeeService: CoffeeService) { }
 

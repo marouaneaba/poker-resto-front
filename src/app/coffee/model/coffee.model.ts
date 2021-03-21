@@ -7,6 +7,6 @@ export interface Coffee {
   available: boolean;
 }
 
-export interface CoffePayloadEvent {
-  KeyWordSearch: any
+export interface CoffeePayloadEvent {
+  KeyWordSearch: any;
 }
