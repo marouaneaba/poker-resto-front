@@ -1,10 +1,9 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {Observable, of} from "rxjs";
-import {AppDataState, DataStateEnum} from "../../../../common/state/data.state";
-import {Coffee, CoffeePayloadEvent} from "../../../model/coffee.model";
-import {CoffeeService} from "../../../../common/service/CoffeeService";
-import {Router} from "@angular/router";
-import {catchError, map, startWith} from "rxjs/operators";
+import {Component, Input, OnInit} from '@angular/core';
+import {Observable} from "rxjs";
+import {AppDataState, DataStateEnum} from "../../../../common/model/state/data.state";
+import {Coffee} from "../../../model/coffee.model";
+import {EventDriverService} from "../../../../common/service/Event.driver.service";
+import {Context, EventCommandType,} from "../../../../common/model/event/data.event";
 
 @Component({
   selector: 'app-coffee-list',
@@ -15,19 +14,18 @@ export class CoffeeListComponent implements OnInit {
 
   @Input()
   public coffees$: Observable<AppDataState<Coffee[]>>;
-  @Output()
-  public coffeeSelect: EventEmitter<Coffee> = new EventEmitter<Coffee>();
-  @Output()
-  public coffeeDelete: EventEmitter<Coffee> = new EventEmitter<Coffee>();
   readonly dataStateEnum = DataStateEnum
 
-  constructor() {}
+  constructor(private eventDriverService: EventDriverService) {}
 
-  ngOnInit(): void {}
-
-  onSelect(coffee: Coffee) {
-    this.coffeeSelect
-      .emit(coffee);
+  ngOnInit(): void {
+    this.eventDriverService
+      .subscribeCommandEvent(eventData => {
+        if(eventData.context == Context.COFFEE
+        && eventData.type == EventCommandType.ALERT_DELETE_ACTION_EVENT) {
+          this.onAlertAndDeleteCoffee(eventData.data)
+        }
+      })
   }
 
   onAlertAndDeleteCoffee(coffee: Coffee) {
@@ -38,7 +36,11 @@ export class CoffeeListComponent implements OnInit {
   }
 
   public onDeleteCoffee(coffee: Coffee) {
-    this.coffeeDelete
-      .emit(coffee);
+    this.eventDriverService
+      .publishCommandEvent({
+        context: Context.COFFEE,
+        type: EventCommandType.DELETE_ACTION_EVENT,
+        data: coffee
+      })
   }
 }

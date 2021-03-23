@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {CoffeeService} from "../../../common/service/CoffeeService";
+import {CoffeeErvice} from "../../../common/service/Coffee.ervice";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {ActivatedRoute} from "@angular/router";
 import {Coffee} from "../../model/coffee.model";
@@ -14,7 +14,7 @@ export class CoffeeEditComponent implements OnInit {
   coffeeFormGroup: FormGroup;
   currentEditCoffee: Coffee
 
-  constructor(private coffeeService: CoffeeService,
+  constructor(private coffeeService: CoffeeErvice,
               private fb: FormBuilder,
               private activateRoute: ActivatedRoute
   ) {}

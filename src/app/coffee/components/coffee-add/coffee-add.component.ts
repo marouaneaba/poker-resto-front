@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {CoffeeService} from "../../../common/service/CoffeeService";
+import {CoffeeErvice} from "../../../common/service/Coffee.ervice";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 
 @Component({
@@ -11,7 +11,7 @@ export class CoffeeAddComponent implements OnInit {
 
   public coffeeFormGroup?: FormGroup;
 
-  constructor(private coffeeService: CoffeeService,
+  constructor(private coffeeService: CoffeeErvice,
               private fb: FormBuilder
   ) { }
 

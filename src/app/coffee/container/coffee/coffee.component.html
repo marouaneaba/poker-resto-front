@@ -1,11 +1,4 @@
-<app-nav-bar-coffee
-  (getCoffees)="onGetCoffees()"
-  (getSelectedCoffees)="onGetSelectedCoffee()"
-  (getAvailableCoffee)="onGetAvailableCoffee()"
-  (searchCoffeeByName)="onSearchCoffeeByName($event)">
-</app-nav-bar-coffee>
+<app-nav-bar-coffee></app-nav-bar-coffee>
 <app-coffee-list
-  [coffees$]="coffees$"
-  (coffeeSelect)="onSelect($event)"
-  (coffeeDelete)="onDeleteCoffee($event)">
+  [coffees$]="coffees$">
 </app-coffee-list>

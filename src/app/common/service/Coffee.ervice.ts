@@ -5,7 +5,7 @@ import {Observable} from 'rxjs';
 import {environment} from "../../../environments/environment";
 
 @Injectable({providedIn: 'root'})
-export class CoffeeService {
+export class CoffeeErvice {
   public constructor(private httpClient: HttpClient) {}
 
   public getCoffees(): Observable<Coffee[]> {

@@ -5,7 +5,7 @@
       "name": "name_tes-1",
       "price": 1000,
       "quantity": 20,
-      "selected": false,
+      "selected": true,
       "available": true
     },
     {
@@ -14,7 +14,7 @@
       "price": 1000,
       "quantity": 20,
       "available": false,
-      "selected": true
+      "selected": false
     },
     {
       "id": 3,

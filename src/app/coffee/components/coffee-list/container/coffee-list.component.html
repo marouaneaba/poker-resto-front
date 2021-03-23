@@ -20,9 +20,7 @@
             <app-coffee-item
               style="display: contents"
               *ngFor="let coffee of coffee.data"
-              [coffee]="coffee"
-              (selectCoffee)="onSelect($event)"
-              (alertAndDeleteCoffee)="onAlertAndDeleteCoffee($event)">
+              [coffee]="coffee">
             </app-coffee-item>
           </table>
         </ng-container>

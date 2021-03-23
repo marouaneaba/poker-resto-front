@@ -1,9 +1,7 @@
 import {Component, EventEmitter, OnInit, Output} from '@angular/core';
-import {CoffeeService} from "../../../common/service/CoffeeService";
-import {catchError, map, startWith} from "rxjs/operators";
-import {AppDataState, DataStateEnum} from "../../../common/state/data.state";
-import {Observable, of} from "rxjs";
-import {Coffee, CoffeePayloadEvent} from "../../model/coffee.model";
+import {CoffeeErvice} from "../../../common/service/Coffee.ervice";
+import {EventDriverService} from "../../../common/service/Event.driver.service";
+import {Context, EventQueryType} from "../../../common/model/event/data.event";
 
 @Component({
   selector: 'app-nav-bar-coffee',
@@ -12,32 +10,41 @@ import {Coffee, CoffeePayloadEvent} from "../../model/coffee.model";
 })
 export class NavBarCoffeeComponent implements OnInit {
 
-  @Output()
-  getCoffees: EventEmitter<any> = new EventEmitter<any>();
-  @Output()
-  getSelectedCoffees: EventEmitter<any> = new EventEmitter<any>();
-  @Output()
-  getAvailableCoffee: EventEmitter<any> = new EventEmitter<any>();
-  @Output()
-  searchCoffeeByName: EventEmitter<CoffeePayloadEvent> = new EventEmitter<CoffeePayloadEvent>();
-
-  constructor(private coffeeService: CoffeeService) { }
+  constructor(private coffeeService: CoffeeErvice,
+              private eventDriverService: EventDriverService) { }
 
   ngOnInit(): void {}
 
   public onGetCoffees(){
-    this.getCoffees.emit()
+    this.eventDriverService
+      .publishQueryEvent({
+        context: Context.COFFEE,
+        type: EventQueryType.GET_ALL_EVENT
+      })
   }
 
   public onGetSelectedCoffee() {
-    this.getSelectedCoffees.emit();
+    this.eventDriverService
+      .publishQueryEvent({
+        context: Context.COFFEE,
+        type: EventQueryType.SELECTED_EVENT
+      });
   }
 
   public onGetAvailableCoffee() {
-    this.getAvailableCoffee.emit();
+    this.eventDriverService
+      .publishQueryEvent({
+        context: Context.COFFEE,
+        type: EventQueryType.AVAILABLE_EVENT
+      });
   }
 
   onSearchCoffeeByName(keyWord: string) {
-    this.searchCoffeeByName.emit({KeyWordSearch: keyWord})
+    this.eventDriverService
+      .publishQueryEvent({
+        context: Context.COFFEE,
+        type: EventQueryType.SEARCH_BY_NAME_ACTION_EVENT,
+        data: keyWord
+      })
   }
 }

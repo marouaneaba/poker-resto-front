@@ -1,6 +1,8 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {Coffee} from "../../../../model/coffee.model";
 import {Router} from "@angular/router";
+import {EventDriverService} from "../../../../../common/service/Event.driver.service";
+import {Context, EventCommandType, EventQueryType} from "../../../../../common/model/event/data.event";
 
 @Component({
   selector: 'app-coffee-item',
@@ -11,23 +13,28 @@ export class CoffeeItemComponent implements OnInit {
 
   @Input()
   coffee: Coffee;
-  @Output()
-  selectCoffee: EventEmitter<Coffee> = new EventEmitter<Coffee>();
-  @Output()
-  alertAndDeleteCoffee: EventEmitter<Coffee> = new EventEmitter<Coffee>();
 
-  constructor(private router: Router) { }
+  constructor(private router: Router,
+              private eventDriverService: EventDriverService) { }
 
   ngOnInit(): void {}
 
   onSelect(coffee: Coffee) {
-    this.selectCoffee
-      .emit(coffee);
+    this.eventDriverService
+      .publishCommandEvent({
+        context: Context.COFFEE,
+        type:EventCommandType.SELECT_ACTION_EVENT,
+        data: coffee
+      })
   }
 
   onAlertAndDeleteCoffee(coffee: Coffee) {
-    this.alertAndDeleteCoffee
-      .emit(coffee);
+    this.eventDriverService
+      .publishCommandEvent({
+        context: Context.COFFEE,
+        type: EventCommandType.ALERT_DELETE_ACTION_EVENT,
+        data: coffee
+      })
   }
 
   onNavigateEditCoffee(coffee: Coffee) {
