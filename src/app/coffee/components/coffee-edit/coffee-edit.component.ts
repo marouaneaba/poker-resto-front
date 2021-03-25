@@ -1,8 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {CoffeeErvice} from "../../../common/service/Coffee.ervice";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
-import {ActivatedRoute} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 import {Coffee} from "../../model/coffee.model";
+import {AlertDisplay} from "../../alert/AlertDisplay";
+
 
 @Component({
   selector: 'app-coffee-edit',
@@ -16,8 +18,8 @@ export class CoffeeEditComponent implements OnInit {
 
   constructor(private coffeeService: CoffeeErvice,
               private fb: FormBuilder,
-              private activateRoute: ActivatedRoute
-  ) {}
+              private activateRoute: ActivatedRoute,
+              private router: Router) {}
 
   ngOnInit(): void {
     this.getCoffeeById(Number(this.activateRoute.snapshot.params.id));
@@ -46,16 +48,17 @@ export class CoffeeEditComponent implements OnInit {
   }
 
   public onSaveCoffee() {
-    console.log(this.coffeeFormGroup);
     this.coffeeService
       .saveCoffee(this.buildCurrentEditCoffee())
       .subscribe(
-        data => alert("Sucess coffee updated"),
-        error => console.log(error),
-      )
+        data => {
+          alert(AlertDisplay.COFFEE_UPDATED_SUCCESS);
+          this.router.navigate(['/coffee']);
+        },
+        error => console.log(error))
   }
 
-  public buildCurrentEditCoffee() :Coffee{
+  public buildCurrentEditCoffee(): Coffee{
     return {
       id: this.currentEditCoffee.id,
       name: this.coffeeFormGroup.value.name,

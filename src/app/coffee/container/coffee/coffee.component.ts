@@ -5,7 +5,9 @@ import {catchError, map, startWith} from "rxjs/operators";
 import {AppDataState, DataStateEnum} from "../../../common/model/state/data.state";
 import {Coffee} from "../../model/coffee.model";
 import {EventDriverService} from "../../../common/service/Event.driver.service";
-import {Context, DataEvent, EventCommandType, EventQueryType} from "../../../common/model/event/data.event";
+import {Context, DataEvent, EventQueryType} from "../../../common/model/event/data.event";
+import {Router} from "@angular/router";
+import {EndPoint} from "../../../common/utils/EndPoint";
 
 @Component({
   selector: 'app-coffee',
@@ -17,15 +19,11 @@ export class CoffeeComponent implements OnInit {
   public coffees$: Observable<AppDataState<Coffee[]>>;
 
   constructor(private coffeeService: CoffeeErvice,
-              private eventDriverService: EventDriverService) {}
+              private eventDriverService: EventDriverService,
+              private router: Router) {}
 
   ngOnInit(): void {
-    this.eventDriverService
-      .subscribeCommandEvent(data => {
-        if(data.context == Context.COFFEE) {
-          this.executeCommandActionEvent(data);
-        }
-      });
+    this.onGetCoffees();
 
     this.eventDriverService
       .subscribeQueryEvent(data => {
@@ -33,14 +31,6 @@ export class CoffeeComponent implements OnInit {
           this.executeQueryActionEvent(data);
         }
       });
-
-    this.coffees$ = this.coffeeService
-      .getCoffees()
-      .pipe(
-        map(data=> ({dataState: DataStateEnum.LOADED, data: data})),
-        startWith({dataState:DataStateEnum.LOADING}),
-        catchError(err => of({dataState:DataStateEnum.ERROR,errorMessage: err.message}))
-      );
   }
 
   public onGetCoffees(){
@@ -81,8 +71,7 @@ export class CoffeeComponent implements OnInit {
       );
   }
 
-  onSearchCoffeeByName(keyWordSearch: any) {
-    console.log(keyWordSearch);
+  public onSearchCoffeeByName(keyWordSearch: any) {
     this.coffees$ = this.coffeeService
       .searchCoffeeByName(keyWordSearch)
       .pipe(
@@ -92,21 +81,27 @@ export class CoffeeComponent implements OnInit {
       );
   }
 
-  onSelect(coffee: Coffee) {
-    this.coffeeService
-      .selectCoffee(coffee)
-      .subscribe(
-        data => {
-          coffee.selected= data.selected;
-        });
-  }
-
   public onDeleteCoffee(coffee: Coffee) {
     this.coffeeService
       .deleteCoffee(coffee)
       .subscribe(
-        data => {this.onGetCoffees()},
+        data => this.onGetCoffees(),
         err => {console.log("Error", err)})
+  }
+
+  public onCreateCoffee(coffeeFormGroup: any) {
+    this.coffeeService
+      .createCoffe(coffeeFormGroup)
+      .subscribe(data => {this.onGetCoffees()},
+        err => console.log(err));
+  }
+
+  public onSelect(coffee: Coffee) {
+    this.coffeeService
+      .selectCoffee(coffee)
+      .subscribe(
+        data => coffee.selected = data.selected,
+      error => console.log(error))
   }
 
   public executeQueryActionEvent(dataEvent: DataEvent<EventQueryType, String>) {
@@ -123,16 +118,8 @@ export class CoffeeComponent implements OnInit {
       case EventQueryType.SEARCH_BY_NAME_ACTION_EVENT:
         this.onSearchCoffeeByName(dataEvent.data);
         break;
-    }
-  }
-
-  public executeCommandActionEvent(dataEvent: DataEvent<EventCommandType, Coffee>) {
-    switch(dataEvent.type){
-      case EventCommandType.SELECT_ACTION_EVENT:
-        this.onSelect(dataEvent.data);
-        break;
-      case EventCommandType.DELETE_ACTION_EVENT:
-        this.onDeleteCoffee(dataEvent.data);
+      case EventQueryType.REFRESH_COFFEE:
+        this.onGetCoffees();
         break;
     }
   }

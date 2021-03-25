@@ -3,6 +3,7 @@ import {HttpClient, HttpParams} from '@angular/common/http';
 import {Coffee} from '../../coffee/model/coffee.model';
 import {Observable} from 'rxjs';
 import {environment} from "../../../environments/environment";
+import {EndPoint} from "../utils/EndPoint";
 
 @Injectable({providedIn: 'root'})
 export class CoffeeErvice {
@@ -11,12 +12,12 @@ export class CoffeeErvice {
   public getCoffees(): Observable<Coffee[]> {
     return this.httpClient
       //.get<Coffe[]>(`${environment.host}${Urls.COFFEE}`);
-      .get<Coffee[]>(`${environment.host}/Coffee`);
+      .get<Coffee[]>(`${environment.host}${EndPoint.COFFEE}`);
   }
 
   public getSelectedCoffees(): Observable<Coffee[]> {
     return this.httpClient
-      .get<Coffee[]>(`${environment.host}/Coffee`,
+      .get<Coffee[]>(`${environment.host}${EndPoint.COFFEE}`,
         {
           params: new HttpParams().set('selected', 'true')
         })
@@ -24,7 +25,7 @@ export class CoffeeErvice {
 
   public getAvailableCoffe(): Observable<Coffee[]> {
     return this.httpClient
-      .get<Coffee[]>(`${environment.host}/Coffee`,
+      .get<Coffee[]>(`${environment.host}${EndPoint.COFFEE}`,
         {
           params: new HttpParams().set('available', 'true')
         })
@@ -32,7 +33,7 @@ export class CoffeeErvice {
 
   public searchCoffeeByName(keyword: string): Observable<Coffee[]>{
     return this.httpClient
-      .get<Coffee[]>(`${environment.host}/Coffee`,
+      .get<Coffee[]>(`${environment.host}${EndPoint.COFFEE}`,
         {
           params: new HttpParams().set('name_like', keyword)
         })
@@ -40,18 +41,17 @@ export class CoffeeErvice {
 
   public selectCoffee(coffee: Coffee): Observable<Coffee>{
     return this.httpClient
-      .put<Coffee>(`${environment.host}/Coffee/${coffee.id}`,this.getCoffeeSelectReverse(coffee))
+      .put<Coffee>(`${environment.host}${EndPoint.COFFEE}/${coffee.id}`,this.getCoffeeSelectReverse(coffee))
   }
 
   public deleteCoffee(coffee: Coffee) {
     return this.httpClient
-      .delete(`${environment.host}/Coffee/${coffee.id}`)
+      .delete(`${environment.host}${EndPoint.COFFEE}/${coffee.id}`)
   }
 
   public createCoffe(dataForm: any) {
-    console.log(dataForm);
     return this.httpClient
-      .post(`${environment.host}/Coffee/`,dataForm)
+      .post(`${environment.host}${EndPoint.COFFEE}/`,dataForm)
   }
 
   public getCoffeeSelectReverse(coffee: Coffee): Coffee{
@@ -61,11 +61,12 @@ export class CoffeeErvice {
 
   public getCoffeeById(id: number): Observable<Coffee>{
     return this.httpClient
-      .get<Coffee>(`${environment.host}/Coffee/${id}`)
+      .get<Coffee>(`${environment.host}${EndPoint.COFFEE}/${id}`)
   }
 
   public saveCoffee(coffee: Coffee): Observable<Coffee> {
+    console.log(coffee);
     return this.httpClient
-      .put<Coffee>(`${environment.host}/Coffee/${coffee.id}`,coffee)
+      .put<Coffee>(`${environment.host}${EndPoint.COFFEE}/${coffee.id}`,coffee)
   }
 }

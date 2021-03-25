@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {CoffeeErvice} from "../../../common/service/Coffee.ervice";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
+import {EventDriverService} from "../../../common/service/Event.driver.service";
 
 @Component({
   selector: 'app-coffee-add',
@@ -21,12 +22,12 @@ export class CoffeeAddComponent implements OnInit {
 
 
   public onCreateCoffee() {
-    console.log(this.coffeeFormGroup);
+    console.log(this.coffeeFormGroup?.value)
     if(this.coffeeFormGroup?.valid) {
       this.coffeeService
         .createCoffe(this.coffeeFormGroup?.value)
-        .subscribe(data => {console.log(data)},
-          err => console.log(err));
+        .subscribe(data => console.log(data),
+          error => console.log(error))
     }
   }
 

@@ -1,7 +1,7 @@
 import {Injectable} from "@angular/core";
 import {Subject} from "rxjs";
-import {DataEvent, EventCommandType, EventQueryType} from "../model/event/data.event";
 import {Coffee} from "../../coffee/model/coffee.model";
+import {DataEvent, EventQueryType} from "../model/event/data.event";
 
 @Injectable({providedIn: 'root'})
 export class EventDriverService {
@@ -11,7 +11,7 @@ export class EventDriverService {
   public eventQuerySubjectObservable = this.eventQuerySubject.asObservable();
 
   // Command stats management
-  private eventCommandSubject: Subject<DataEvent<EventCommandType,Coffee>> = new Subject<DataEvent<EventCommandType,Coffee>>();
+  private eventCommandSubject: Subject<DataEvent<any,Coffee>> = new Subject<DataEvent<any,Coffee>>();
   private eventCommandSubjectObservable = this.eventCommandSubject.asObservable();
 
   // publish data to subscribe
@@ -19,11 +19,11 @@ export class EventDriverService {
     this.eventQuerySubject.next(dataEvent);
   }
 
-  public publishCommandEvent(dataEvent: DataEvent<EventCommandType,Coffee>) {
+  public publishCommandEvent(dataEvent: DataEvent<any,Coffee>) {
     this.eventCommandSubject.next(dataEvent);
   }
 
-  public subscribeCommandEvent(next: (value: DataEvent<EventCommandType,Coffee>) => void) {
+  public subscribeCommandEvent(next: (value: DataEvent<any,Coffee>) => void) {
     this.eventCommandSubjectObservable
       .subscribe(data => {
         next(data);
@@ -37,7 +37,7 @@ export class EventDriverService {
       })
   }
 
-  public subscribeQueryAndCommandEvent(nextCommand: (value: DataEvent<EventCommandType,Coffee>) => void,
+  public subscribeQueryAndCommandEvent(nextCommand: (value: DataEvent<any,Coffee>) => void,
                                                      nextQuery: (value: DataEvent<EventQueryType,string>) => void) {
     this.subscribeCommandEvent(nextCommand);
     this.subscribeQueryEvent(nextQuery);
