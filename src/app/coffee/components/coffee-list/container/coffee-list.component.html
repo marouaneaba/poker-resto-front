@@ -1,14 +1,24 @@
 <div>
   <ul>
     <div class="container overflow-auto">
-      <ng-container class="container" *ngIf="(coffees$ | async) as coffee" [ngSwitch]="coffee.dataState">
-        <ng-container class="alert-info" *ngSwitchCase="dataStateEnum.LOADING">
+      <ng-container class="container" *ngIf="(coffees$ | async) as coffeeState" [ngSwitch]="coffeeState.dataState">
+        <div class="alert alert-success" role="alert" *ngIf="coffeeState.message?.successMessage">
+          <h4 class="alert-heading">Well done!</h4>
+          <p>{{coffeeState.message.successMessage}}</p>
+        </div>
+
+        <div class="alert alert-danger" role="alert" *ngIf="coffeeState.message?.errorMessage">
+          <h4 class="alert-heading">Alert!</h4>
+          <p>{{coffeeState.message.errorMessage}}</p>
+        </div>
+
+        <ng-container class="alert-danger" *ngSwitchCase="coffeeStatEnum.LOADING">
           Loading ...
         </ng-container>
-        <ng-container class="alert-danger" *ngSwitchCase="dataStateEnum.ERROR">
-          {{coffee.errorMessage}}
+        <ng-container class="alert-danger" *ngSwitchCase="coffeeStatEnum.ERROR">
+
         </ng-container>
-        <ng-container *ngSwitchCase="dataStateEnum.LOADED">
+        <ng-container *ngSwitchCase="coffeeStatEnum.SUCCESS">
           <table class="table container-sm">
             <tr>
               <th>name</th>
@@ -19,7 +29,7 @@
             </tr>
             <app-coffee-item
               style="display: contents"
-              *ngFor="let coffee of coffee.data"
+              *ngFor="let coffee of coffeeState.coffee"
               [coffee]="coffee">
             </app-coffee-item>
           </table>

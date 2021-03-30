@@ -4,6 +4,10 @@ import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {ActivatedRoute, Router} from "@angular/router";
 import {Coffee} from "../../model/coffee.model";
 import {AlertDisplay} from "../../alert/AlertDisplay";
+import {Store} from "@ngrx/store";
+import {ActionCoffeeTypeEnum, CoffeesAction} from "../../nrgx/Coffee.action";
+import {CoffeeStatEnum} from "../../nrgx/Reducer.coffee";
+import {EndPoint} from "../../../common/utils/EndPoint";
 
 
 @Component({
@@ -19,10 +23,20 @@ export class CoffeeEditComponent implements OnInit {
   constructor(private coffeeService: CoffeeErvice,
               private fb: FormBuilder,
               private activateRoute: ActivatedRoute,
-              private router: Router) {}
+              private router: Router,
+              private store:  Store<any>) {}
 
   ngOnInit(): void {
+    console.log('mar')
     this.getCoffeeById(Number(this.activateRoute.snapshot.params.id));
+
+    this.store.subscribe(state => {
+      console.log(state);
+      if(state.coffeeState.dataState == CoffeeStatEnum.LOADING){
+        this.router
+          .navigateByUrl(EndPoint.COFFEE);
+      }
+    })
   }
 
   public initForm(coffee: Coffee) {
@@ -48,14 +62,8 @@ export class CoffeeEditComponent implements OnInit {
   }
 
   public onSaveCoffee() {
-    this.coffeeService
-      .saveCoffee(this.buildCurrentEditCoffee())
-      .subscribe(
-        data => {
-          alert(AlertDisplay.COFFEE_UPDATED_SUCCESS);
-          this.router.navigate(['/coffee']);
-        },
-        error => console.log(error))
+    this.store
+      .dispatch(new CoffeesAction(ActionCoffeeTypeEnum.EDIT_COFFEE, this.buildCurrentEditCoffee()));
   }
 
   public buildCurrentEditCoffee(): Coffee{
