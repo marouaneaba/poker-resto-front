@@ -1,7 +1,7 @@
-import {Component, EventEmitter, OnInit, Output} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {CoffeeErvice} from "../../../common/service/Coffee.ervice";
-import {EventDriverService} from "../../../common/service/Event.driver.service";
-import {Context, EventQueryType} from "../../../common/model/event/data.event";
+import {Store} from "@ngrx/store";
+import {ActionCoffeeTypeEnum, CoffeesAction} from "../../nrgx/Coffee.action";
 
 @Component({
   selector: 'app-nav-bar-coffee',
@@ -11,40 +11,27 @@ import {Context, EventQueryType} from "../../../common/model/event/data.event";
 export class NavBarCoffeeComponent implements OnInit {
 
   constructor(private coffeeService: CoffeeErvice,
-              private eventDriverService: EventDriverService) { }
+              private store: Store<any>) { }
 
   ngOnInit(): void {}
 
   public onGetCoffees(){
-    this.eventDriverService
-      .publishQueryEvent({
-        context: Context.COFFEE,
-        type: EventQueryType.GET_ALL_EVENT
-      })
+    this.store
+      .dispatch(new CoffeesAction(ActionCoffeeTypeEnum.GET_ALL_COFFEES, {}));
   }
 
   public onGetSelectedCoffee() {
-    this.eventDriverService
-      .publishQueryEvent({
-        context: Context.COFFEE,
-        type: EventQueryType.SELECTED_EVENT
-      });
+    this.store
+      .dispatch(new CoffeesAction(ActionCoffeeTypeEnum.GET_SELECTED_COFFEES, {}));
   }
 
   public onGetAvailableCoffee() {
-    this.eventDriverService
-      .publishQueryEvent({
-        context: Context.COFFEE,
-        type: EventQueryType.AVAILABLE_EVENT
-      });
+    this.store
+      .dispatch(new CoffeesAction(ActionCoffeeTypeEnum.GET_AVAILABLE_COFFEES, {}));
   }
 
   onSearchCoffeeByName(keyWord: string) {
-    this.eventDriverService
-      .publishQueryEvent({
-        context: Context.COFFEE,
-        type: EventQueryType.SEARCH_BY_NAME_ACTION_EVENT,
-        data: keyWord
-      })
+    this.store
+      .dispatch(new CoffeesAction(ActionCoffeeTypeEnum.SEARCH_COFFEE_BY_NAME, {keyWord: keyWord}));
   }
 }

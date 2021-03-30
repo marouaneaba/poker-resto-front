@@ -41,7 +41,12 @@ export class CoffeeErvice {
 
   public selectCoffee(coffee: Coffee): Observable<Coffee>{
     return this.httpClient
-      .put<Coffee>(`${environment.host}${EndPoint.COFFEE}/${coffee.id}`,this.getCoffeeSelectReverse(coffee))
+      .put<Coffee>(`${environment.host}${EndPoint.COFFEE}/${coffee.id}`,this.getCoffeeSelectReverse({...coffee}))
+  }
+
+  private getCoffeeSelectReverse(coffee: Coffee): Coffee{
+    coffee.selected = !coffee.selected
+    return coffee
   }
 
   public deleteCoffee(coffee: Coffee) {
@@ -54,18 +59,12 @@ export class CoffeeErvice {
       .post(`${environment.host}${EndPoint.COFFEE}/`,dataForm)
   }
 
-  public getCoffeeSelectReverse(coffee: Coffee): Coffee{
-    coffee.selected = !coffee.selected
-    return coffee
-  }
-
   public getCoffeeById(id: number): Observable<Coffee>{
     return this.httpClient
       .get<Coffee>(`${environment.host}${EndPoint.COFFEE}/${id}`)
   }
 
   public saveCoffee(coffee: Coffee): Observable<Coffee> {
-    console.log(coffee);
     return this.httpClient
       .put<Coffee>(`${environment.host}${EndPoint.COFFEE}/${coffee.id}`,coffee)
   }

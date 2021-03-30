@@ -1,10 +1,11 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {Coffee} from "../../../../model/coffee.model";
 import {Router} from "@angular/router";
-import {EventDriverService} from "../../../../../common/service/Event.driver.service";
 import {Context, EventQueryType} from "../../../../../common/model/event/data.event";
 import {CoffeeErvice} from "../../../../../common/service/Coffee.ervice";
 import {AlertDisplay} from "../../../../alert/AlertDisplay";
+import {Store} from "@ngrx/store";
+import {ActionCoffeeTypeEnum, CoffeesAction} from "../../../../nrgx/Coffee.action";
 
 @Component({
   selector: 'app-coffee-item',
@@ -18,15 +19,13 @@ export class CoffeeItemComponent implements OnInit {
 
   constructor(private router: Router,
               private coffeeService: CoffeeErvice,
-              private eventDriverService: EventDriverService) { }
+              private store: Store) { }
 
   ngOnInit(): void {}
 
   onSelect(coffee: Coffee) {
-    this.coffeeService
-      .selectCoffee(coffee)
-      .subscribe(data => coffee.selected = data.selected,
-        error => console.log(error))
+    this.store
+      .dispatch(new CoffeesAction(ActionCoffeeTypeEnum.SELECT_COFFEE, coffee));
   }
 
   onAlertAndDeleteCoffee(coffee: Coffee) {
@@ -37,18 +36,13 @@ export class CoffeeItemComponent implements OnInit {
   }
 
   public onDeleteCoffee(coffee: Coffee) {
-    this.coffeeService
-      .deleteCoffee(coffee)
-      .subscribe(data => console.log(data),
-        error => console.log(error))
-    this.eventDriverService
-      .publishQueryEvent({
-        context: Context.COFFEE,
-        type: EventQueryType.REFRESH_COFFEE
-      })
+    this.store
+      .dispatch(new CoffeesAction(ActionCoffeeTypeEnum.DELETE_COFFEE, coffee));
   }
 
   onNavigateEditCoffee(coffee: Coffee) {
-    this.router.navigateByUrl(`/coffee/editCoffee/${coffee.id}`)
+    this.store
+      .dispatch(new CoffeesAction(ActionCoffeeTypeEnum.INITIAL_EDIT_COFFEE, coffee));
+    this.router.navigate([`/coffee/editCoffee/${coffee.id}`]);
   }
 }
