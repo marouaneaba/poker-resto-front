@@ -24,6 +24,7 @@
     "concurrently": "^6.0.0",
     "font-awesome": "^4.7.0",
     "httpclient": "^0.1.0",
+    "jquery": "^3.6.0",
     "json-server": "^0.16.3",
     "object-path": "^0.11.5",
     "rxjs": "~6.6.3",
