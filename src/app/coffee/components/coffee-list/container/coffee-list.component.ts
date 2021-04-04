@@ -1,6 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {Observable} from "rxjs";
-import {CoffeeState, CoffeeStatEnum} from "../../../nrgx/Reducer.coffee";
+import {Observable} from 'rxjs';
+import {CoffeeState, CoffeeStatEnum} from '../../../nrgx/Reducer.coffee';
 
 @Component({
   selector: 'app-coffee-list',
@@ -11,7 +11,7 @@ export class CoffeeListComponent implements OnInit {
 
   @Input()
   public coffees$: Observable<CoffeeState>;
-  readonly coffeeStatEnum = CoffeeStatEnum
+  readonly coffeeStatEnum = CoffeeStatEnum;
 
   constructor() {}
 
