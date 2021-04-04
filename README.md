@@ -14,6 +14,8 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 * [Git] - TrunkBase, Livraison continue, pas du proessus bloque la livraison, aucun besoin de créer plusieurs branche
 * [Sonar] - https://sonarcloud.io/dashboard?id=marouaneaba_poker-resto-front
 * [node.js] - evented I/O for the backend
+* [JFrog] - https://mabk.jfrog.io/ui/repos/tree/General/artifactory-build-info
+* [Github-Action] - automatiser les flux du travail et des taches (CI/CD), simplification par ré-utilisation d'autre github-action.
 
 ## Development server
 
