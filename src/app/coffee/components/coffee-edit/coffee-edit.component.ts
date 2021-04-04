@@ -1,13 +1,12 @@
 import {Component, OnInit} from '@angular/core';
-import {CoffeeErvice} from "../../../common/service/Coffee.ervice";
-import {FormBuilder, FormGroup, Validators} from "@angular/forms";
-import {ActivatedRoute, Router} from "@angular/router";
-import {Coffee} from "../../model/coffee.model";
-import {AlertDisplay} from "../../alert/AlertDisplay";
-import {Store} from "@ngrx/store";
-import {ActionCoffeeTypeEnum, CoffeesAction} from "../../nrgx/Coffee.action";
-import {CoffeeStatEnum} from "../../nrgx/Reducer.coffee";
-import {EndPoint} from "../../../common/utils/EndPoint";
+import {CoffeeService} from '../../../common/service/Coffee.service';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {ActivatedRoute, Router} from '@angular/router';
+import {Coffee} from '../../model/coffee.model';
+import {Store} from '@ngrx/store';
+import {ActionCoffeeTypeEnum, CoffeesAction} from '../../nrgx/Coffee.action';
+import {CoffeeStatEnum} from '../../nrgx/Reducer.coffee';
+import {EndPoint} from '../../../common/utils/EndPoint';
 
 
 @Component({
@@ -18,25 +17,23 @@ import {EndPoint} from "../../../common/utils/EndPoint";
 export class CoffeeEditComponent implements OnInit {
 
   coffeeFormGroup: FormGroup;
-  currentEditCoffee: Coffee
+  currentEditCoffee: Coffee;
 
-  constructor(private coffeeService: CoffeeErvice,
+  constructor(private coffeeService: CoffeeService,
               private fb: FormBuilder,
               private activateRoute: ActivatedRoute,
               private router: Router,
-              private store:  Store<any>) {}
+              private store: Store<any>) {}
 
   ngOnInit(): void {
-    console.log('mar')
     this.getCoffeeById(Number(this.activateRoute.snapshot.params.id));
 
     this.store.subscribe(state => {
-      console.log(state);
-      if(state.coffeeState.dataState == CoffeeStatEnum.LOADING){
+      if  (state.coffeeState.dataState === CoffeeStatEnum.LOADING){
         this.router
           .navigateByUrl(EndPoint.COFFEE);
       }
-    })
+    });
   }
 
   public initForm(coffee: Coffee) {
@@ -54,8 +51,8 @@ export class CoffeeEditComponent implements OnInit {
       .getCoffeeById(id)
       .subscribe(
         coffee => {
-            this.currentEditCoffee = coffee
-            this.initForm(coffee)
+            this.currentEditCoffee = coffee;
+            this.initForm(coffee);
         },
             error => console.log(error),
       );
@@ -74,7 +71,7 @@ export class CoffeeEditComponent implements OnInit {
       quantity: this.coffeeFormGroup.value.quantity,
       selected: this.coffeeFormGroup.value.selected,
       available: this.coffeeFormGroup.value.available,
-    }
+    };
   }
 
 }

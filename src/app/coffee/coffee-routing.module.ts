@@ -1,8 +1,8 @@
 import {RouterModule, Routes} from '@angular/router';
 import {CoffeeComponent} from './container/coffee/coffee.component';
 import {NgModule} from '@angular/core';
-import {CoffeeAddComponent} from "./components/coffee-add/coffee-add.component";
-import {CoffeeEditComponent} from "./components/coffee-edit/coffee-edit.component";
+import {CoffeeAddComponent} from './components/coffee-add/coffee-add.component';
+import {CoffeeEditComponent} from './components/coffee-edit/coffee-edit.component';
 
 const routes: Routes = [
   { path: '', component: CoffeeComponent },

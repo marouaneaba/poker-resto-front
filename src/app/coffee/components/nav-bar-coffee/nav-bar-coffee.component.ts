@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
-import {CoffeeErvice} from "../../../common/service/Coffee.ervice";
-import {Store} from "@ngrx/store";
-import {ActionCoffeeTypeEnum, CoffeesAction} from "../../nrgx/Coffee.action";
+import {CoffeeService} from '../../../common/service/Coffee.service';
+import {Store} from '@ngrx/store';
+import {ActionCoffeeTypeEnum, CoffeesAction} from '../../nrgx/Coffee.action';
 
 @Component({
   selector: 'app-nav-bar-coffee',
@@ -10,7 +10,7 @@ import {ActionCoffeeTypeEnum, CoffeesAction} from "../../nrgx/Coffee.action";
 })
 export class NavBarCoffeeComponent implements OnInit {
 
-  constructor(private coffeeService: CoffeeErvice,
+  constructor(private coffeeService: CoffeeService,
               private store: Store<any>) { }
 
   ngOnInit(): void {}
@@ -32,6 +32,6 @@ export class NavBarCoffeeComponent implements OnInit {
 
   onSearchCoffeeByName(keyWord: string) {
     this.store
-      .dispatch(new CoffeesAction(ActionCoffeeTypeEnum.SEARCH_COFFEE_BY_NAME, {keyWord: keyWord}));
+      .dispatch(new CoffeesAction(ActionCoffeeTypeEnum.SEARCH_COFFEE_BY_NAME, '{keyWord}'));
   }
 }

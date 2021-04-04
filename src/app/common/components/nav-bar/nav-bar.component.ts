@@ -1,9 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import {CoffeeErvice} from "../../service/Coffee.ervice";
-import {AppDataState, DataStateEnum} from "../../model/state/data.state";
-import {catchError, map, startWith} from "rxjs/operators";
-import {Observable, of} from "rxjs";
-import {Coffee} from "../../../coffee/model/coffee.model";
+import {CoffeeService} from '../../service/Coffee.service';
+import {AppDataState} from '../../model/state/data.state';
+import {Observable} from 'rxjs';
+import {Coffee} from '../../../coffee/model/coffee.model';
 
 @Component({
   selector: 'app-nav-bar',
@@ -12,9 +11,9 @@ import {Coffee} from "../../../coffee/model/coffee.model";
 })
 export class NavBarComponent implements OnInit {
 
-  coffes$: Observable<AppDataState<Coffee[]>>
+  coffes$: Observable<AppDataState<Coffee[]>>;
 
-  constructor(private coffeeService: CoffeeErvice) { }
+  constructor(private coffeeService: CoffeeService) { }
 
   ngOnInit(): void {}
 }

@@ -1,11 +1,11 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {Coffee} from "../../../../model/coffee.model";
-import {Router} from "@angular/router";
-import {Context, EventQueryType} from "../../../../../common/model/event/data.event";
-import {CoffeeErvice} from "../../../../../common/service/Coffee.ervice";
-import {AlertDisplay} from "../../../../alert/AlertDisplay";
-import {Store} from "@ngrx/store";
-import {ActionCoffeeTypeEnum, CoffeesAction} from "../../../../nrgx/Coffee.action";
+import {Coffee} from '../../../../model/coffee.model';
+import {Router} from '@angular/router';
+import {CoffeeService} from '../../../../../common/service/Coffee.service';
+import {AlertDisplay} from '../../../../alert/AlertDisplay';
+import {Store} from '@ngrx/store';
+import {ActionCoffeeTypeEnum, CoffeesAction} from '../../../../nrgx/Coffee.action';
+import {EndPoint} from '../../../../../common/utils/EndPoint';
 
 @Component({
   selector: 'app-coffee-item',
@@ -18,7 +18,7 @@ export class CoffeeItemComponent implements OnInit {
   coffee: Coffee;
 
   constructor(private router: Router,
-              private coffeeService: CoffeeErvice,
+              private coffeeService: CoffeeService,
               private store: Store) { }
 
   ngOnInit(): void {}
@@ -30,7 +30,7 @@ export class CoffeeItemComponent implements OnInit {
 
   onAlertAndDeleteCoffee(coffee: Coffee) {
     const response: boolean = confirm(AlertDisplay.COFFEE_DELETE_CONFIRM);
-    if(response){
+    if (response){
       this.onDeleteCoffee(coffee);
     }
   }
@@ -43,6 +43,6 @@ export class CoffeeItemComponent implements OnInit {
   onNavigateEditCoffee(coffee: Coffee) {
     this.store
       .dispatch(new CoffeesAction(ActionCoffeeTypeEnum.INITIAL_EDIT_COFFEE, coffee));
-    this.router.navigate([`/coffee/editCoffee/${coffee.id}`]);
+    this.router.navigate([`${EndPoint.EDIT_COFFEE}${coffee.id}`]);
   }
 }
