@@ -7,31 +7,45 @@ on:
   [push, pull_request]
 
 jobs:
-  build:
+  CI:
 
     runs-on: ubuntu-latest
     # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
 
     steps:
-    - name: Checkout branche
+    - name: Checkout source code
       uses: actions/checkout@v2
     - name: Use Node.js ${{ matrix.node-version }}
       uses: actions/setup-node@v1
       with:
-        node-version: 12.x
+        node-version: 15.x
     - name: Install dependencies
       run: |
-        npm update
         npm install
-    - name: Build app  
-      run: npm run build
-    - name: Lint  
+    - name: Build app
+      run: npm run build:prod
+    - name: test
+      run: npm run test:ci
+    - name: e2e
+      run: npm run e2e:ci
+    - name: Lint
       run: npm run lint
-    - name: Build
-      run: npm run build
-      
-    
-    
-    
-    
-    
+    - name : qualite sonar
+      run : echo 'sonar'
+    - name: artifact in JFrog
+      run: echo 'jfrog'
+
+  CD:
+    needs: CI
+    runs-on: ubuntu-latest
+    steps:
+    - name: recuperer artificat
+      run: echo 'fetchJFrog'
+    - name: deploy
+      run: echo 'deploy'
+
+
+
+
+
+

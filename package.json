@@ -8,6 +8,7 @@
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
+    "build:prod": "ng build --prod",
     "test:ci": "ng test -c=ci",
     "e2e:ci": "ng e2e -c=ci",
     "postinstall": "webdriver-manager update --standalone false --gecko false"
