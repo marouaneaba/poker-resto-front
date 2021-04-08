@@ -8,6 +8,7 @@ import { CoffeeEditComponent } from './components/coffee-edit/coffee-edit.compon
 import { NavBarCoffeeComponent } from './components/nav-bar-coffee/nav-bar-coffee.component';
 import { CoffeeListComponent } from './components/coffee-list/container/coffee-list.component';
 import { CoffeeItemComponent } from './components/coffee-list/components/coffee-item/coffee-item.component';
+import { PaginationComponent } from './components/pagination/pagination.component';
 
 
 
@@ -19,7 +20,8 @@ import { CoffeeItemComponent } from './components/coffee-list/components/coffee-
     CoffeeEditComponent,
     NavBarCoffeeComponent,
     CoffeeListComponent,
-    CoffeeItemComponent
+    CoffeeItemComponent,
+    PaginationComponent
   ],
   imports: [
     CoffeeRoutingModule,

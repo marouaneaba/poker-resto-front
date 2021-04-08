@@ -20,6 +20,8 @@ export interface CoffeeState {
   message: Message;
   dataState: CoffeeStatEnum;
   action: ActionCoffeeTypeEnum;
+  totalPage: number,
+  currentPage: number,
 }
 
 export function coffeeReducer(currentState: CoffeeState, coffeeAction: Action): CoffeeState {
@@ -117,6 +119,8 @@ export function coffeeReducer(currentState: CoffeeState, coffeeAction: Action): 
         message: null,
         dataState: CoffeeStatEnum.INITIAL,
         action: null,
+        totalPage: 8,
+        currentPage: 1,
       };
   }
 }

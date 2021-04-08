@@ -1,0 +1,17 @@
+<nav aria-label="Page navigation example" *ngIf="this.isPaginationActive()">
+  <ul class="pagination justify-content-center">
+    <li class="page-item disabled" *ngIf="previousPageVisible()">
+      <a class="page-link" tabindex="-1" (click)="previousPageOnClick()">Previous</a>
+    </li>
+
+    <div *ngFor="let page of this.pages">
+      <li class="page-item" disabled="{{this.currentPage == page.id}}">
+        <p class="page-link" name="pageIndex" (click)="this.switchToPage(page.id)">{{page.id}}</p>
+      </li>
+    </div>
+
+    <li class="page-item" *ngIf="nextPageVisible()">
+      <a class="page-link" (click)="nextPageOnClick()">Next</a>
+    </li>
+  </ul>
+</nav>
