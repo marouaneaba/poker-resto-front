@@ -24,25 +24,49 @@ jobs:
         npm install
     - name: Build app
       run: npm run build:prod
-    - name: test
-      run: npm run test:ci
-    - name: e2e
-      run: npm run e2e:ci
+    #- name: test
+      #run: npm run test:ci
+    #- name: e2e
+      #run: npm run e2e:ci
     - name: Lint
       run: npm run lint
     - name : qualite sonar
       run : echo 'sonar'
     - name: artifact in JFrog
       run: echo 'jfrog'
+    - name: Inject slug/short variables
+      uses: rlespinasse/github-slug-action@v2.x
+    - name: upload artifact
+      uses: actions/upload-artifact@v2
+      with:
+        name: poker-resto-front-${{ env.GITHUB_REF_SLUG }}-${{ github.run_id }}-${{ github.run_number }}
+        path: ./dist/poker-bar-front
 
   CD:
     needs: CI
     runs-on: ubuntu-latest
     steps:
-    - name: recuperer artificat
-      run: echo 'fetchJFrog'
-    - name: deploy
-      run: echo 'deploy'
+    - name: inject slug/short variables
+      uses: rlespinasse/github-slug-action@v2.x
+    - name: download artifact
+      uses: actions/download-artifact@v2
+      with:
+        name: poker-resto-front-${{ env.GITHUB_REF_SLUG }}-${{ github.run_id }}-${{ github.run_number }}
+        path: './build'
+    - name: deploy to Netlify
+      uses: nwtgck/actions-netlify@v1.1
+      with:
+        publish-dir: './build'
+        production-branch: master
+        deploy-message: "Deploy from GitHub Actions"
+        enable-pull-request-comment: true
+        enable-commit-comment: true
+        overwrites-pull-request-comment: true
+      env:
+        NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
+        NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
+
+
 
 
 

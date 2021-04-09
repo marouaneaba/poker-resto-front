@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import {Store} from "@ngrx/store";
-import {ActionCoffeeTypeEnum, CoffeesAction} from "../../nrgx/Coffee.action";
-import {environment} from "../../../../environments/environment";
+import {Store} from '@ngrx/store';
+import {ActionCoffeeTypeEnum, CoffeesAction} from '../../nrgx/Coffee.action';
+import {environment} from '../../../../environments/environment';
 
 @Component({
   selector: 'app-pagination',
@@ -11,7 +11,7 @@ import {environment} from "../../../../environments/environment";
 export class PaginationComponent implements OnInit {
 
   currentPage: number;
-  pageNumber : number;
+  pageNumber: number;
   pages = [];
 
   constructor(private store: Store<any>) { }
@@ -22,16 +22,13 @@ export class PaginationComponent implements OnInit {
         this.pageNumber = state.coffeeState.totalPage;
         this.currentPage = state.coffeeState.currentPage;
         this.createPagination();
-      })
+      });
   }
 
   public createPagination() {
-    console.log(this.pages);
-    console.log(this.pageNumber)
-    for(let i = (this.pages.length+1); i <= this.pageNumber; i++) {
+    for (let i = (this.pages.length + 1); i <= this.pageNumber; i++) {
       this.pages.push({id: i});
     }
-    console.log(this.pages);
   }
 
   public nextPageOnClick() {

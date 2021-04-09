@@ -35,11 +35,11 @@ export enum ActionCoffeeTypeEnum {
   CREATE_COFFEE_ERROR = '[COFFEE] Create coffee error',
   CREATE_COFFEE_SUCCESS = '[COFFEE] Create coffee success',
   // Next page event
-  NEXT_PAGE_EVENT = "Next page event",
+  NEXT_PAGE_EVENT = 'Next page event',
   // Previous page event
-  PREVIOUS_PAGE_EVENT = "Previous page event",
+  PREVIOUS_PAGE_EVENT = 'Previous page event',
   // Switch to page
-  SWITCH_TO_PAGE = "Switch to page",
+  SWITCH_TO_PAGE = 'Switch to page',
 }
 
 export class CoffeesAction implements Action {

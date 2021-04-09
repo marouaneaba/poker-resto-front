@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import {Injector, NgModule} from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app/app.component';
 import {HttpClientModule} from '@angular/common/http';
@@ -12,6 +12,7 @@ import {EffectsModule} from '@ngrx/effects';
 import {StoreDevtoolsModule} from '@ngrx/store-devtools';
 import {coffeeReducer} from '../../coffee/nrgx/Reducer.coffee';
 import {EffectsCoffee} from '../../coffee/nrgx/Effects.coffee';
+import {createCustomElement} from '@angular/elements';
 
 @NgModule({
   declarations: [
@@ -34,4 +35,11 @@ import {EffectsCoffee} from '../../coffee/nrgx/Effects.coffee';
   exports: [],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+  constructor(private injector: Injector) {
+    const restaurantCustomElement = createCustomElement(AppComponent, {injector});
+    customElements.define('poker-restaurant', restaurantCustomElement);
+  }
+
+  ngDoBoostrap() {}
+}
