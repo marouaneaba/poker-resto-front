@@ -32,7 +32,6 @@ export function coffeeReducer(currentState: CoffeeState, coffeeAction: Action): 
         dataState: CoffeeStatEnum.INITIAL,
         action: coffeeAction.type,
       };
-      break;
     case ActionCoffeeTypeEnum.CREATE_COFFEE:
     case ActionCoffeeTypeEnum.EDIT_COFFEE:
     case ActionCoffeeTypeEnum.SELECT_COFFEE:
@@ -46,7 +45,6 @@ export function coffeeReducer(currentState: CoffeeState, coffeeAction: Action): 
         dataState: CoffeeStatEnum.LOADING,
         action: coffeeAction.type,
       };
-      break;
     case ActionCoffeeTypeEnum.CREATE_COFFEE_SUCCESS:
       return {
         ...currentState,
@@ -54,7 +52,6 @@ export function coffeeReducer(currentState: CoffeeState, coffeeAction: Action): 
         dataState: CoffeeStatEnum.SUCCESS,
         action: coffeeAction.type,
       };
-      break;
     case ActionCoffeeTypeEnum.EDIT_COFFEE_SUCCESS:
     case ActionCoffeeTypeEnum.SELECT_COFFEE_SUCCEESS:
       // TODO refacto
@@ -73,7 +70,6 @@ export function coffeeReducer(currentState: CoffeeState, coffeeAction: Action): 
         action: coffeeAction.type,
         message: editCoffeeSuccessMessage,
       };
-      break;
     case ActionCoffeeTypeEnum.DELETE_COFFEE_SUCCESS:
       // TODO refacto
       const coffeeDeleted = (coffeeAction as CoffeeActionType).payload;
@@ -87,7 +83,6 @@ export function coffeeReducer(currentState: CoffeeState, coffeeAction: Action): 
         action: coffeeAction.type,
         message: deleteCoffeeErrorMessage,
       };
-      break;
     case ActionCoffeeTypeEnum.SEARCH_COFFEE_BY_NAME_SUCCESS:
     case ActionCoffeeTypeEnum.GET_AVAILABLE_COFFEES_SUCCESS:
     case ActionCoffeeTypeEnum.GET_SELECTED_COFFEES_SUCCESS:
@@ -98,7 +93,6 @@ export function coffeeReducer(currentState: CoffeeState, coffeeAction: Action): 
         dataState: CoffeeStatEnum.SUCCESS,
         action: coffeeAction.type,
       };
-      break;
     case ActionCoffeeTypeEnum.EDIT_COFFEE_ERROR:
     case ActionCoffeeTypeEnum.EDIT_COFFEE_ERROR:
     case ActionCoffeeTypeEnum.SELECT_COFFEE_ERROR:
@@ -112,7 +106,6 @@ export function coffeeReducer(currentState: CoffeeState, coffeeAction: Action): 
         dataState: CoffeeStatEnum.ERROR,
         message: {errorMessage: (coffeeAction as CoffeeActionType).payload},
       };
-      break;
     default:
       return {
         coffee: [],

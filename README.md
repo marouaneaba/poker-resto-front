@@ -1,4 +1,5 @@
-# PokerBarFront
+# PokerBarFront  <br/>
+[![CI Poker-restaurant-front](https://github.com/marouaneaba/poker-resto-front/actions/workflows/ci-cd.yml/badge.svg?branch=master)](https://github.com/marouaneaba/poker-resto-front/actions/workflows/ci-cd.yml)
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 8.0.3.
 
