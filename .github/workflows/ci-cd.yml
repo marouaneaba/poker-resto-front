@@ -30,8 +30,15 @@ jobs:
       #run: npm run e2e:ci
     - name: Lint
       run: npm run lint
-    - name : qualite sonar
-      run : echo 'sonar'
+    - name: SonarCloud Scan
+      uses: sonarsource/sonarcloud-github-action@master
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHU_TOKEN }}
+        SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+      with:
+        args: >
+          -Dsonar.organization=${{ secrets.SONAR_ORGANIZATION }}
+          -Dsonar.projectKey=${{ secrets.SONAR_PROJECTKEY }}
     - name: artifact in JFrog
       run: echo 'jfrog'
     - name: Inject slug/short variables
@@ -65,11 +72,3 @@ jobs:
       env:
         NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
         NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
-
-
-
-
-
-
-
-
