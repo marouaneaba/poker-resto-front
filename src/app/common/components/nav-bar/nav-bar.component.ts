@@ -1,8 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import {CoffeeService} from '../../service/Coffee.service';
-import {AppDataState} from '../../model/state/data.state';
-import {Observable} from 'rxjs';
-import {Coffee} from '../../../coffee/model/coffee.model';
+import {Component, OnInit, Output, EventEmitter} from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-nav-bar',
@@ -11,9 +8,15 @@ import {Coffee} from '../../../coffee/model/coffee.model';
 })
 export class NavBarComponent implements OnInit {
 
-  coffes$: Observable<AppDataState<Coffee[]>>;
+  @Output()
+  private tabSelected = new EventEmitter();
 
-  constructor(private coffeeService: CoffeeService) { }
+  constructor(private router: Router) { }
 
   ngOnInit(): void {}
+
+  public navigateTo(redirect: string) {
+    this.tabSelected.emit(redirect);
+    this.router.navigate([`${redirect}`]);
+  }
 }

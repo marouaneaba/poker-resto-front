@@ -19,7 +19,7 @@ import {createCustomElement} from '@angular/elements';
     AppComponent,
     NavBarComponent,
     HeaderComponent,
-    FooterComponent
+    FooterComponent,
   ],
   imports: [
     BrowserModule,
@@ -32,7 +32,8 @@ import {createCustomElement} from '@angular/elements';
     StoreDevtoolsModule.instrument() // Each ngrx event the chrome plugin will be notified
   ],
   providers: [],
-  exports: [],
+  exports: [
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule {
