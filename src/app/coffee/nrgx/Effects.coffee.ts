@@ -72,7 +72,7 @@ export class EffectsCoffee {
         .pipe(
           ofType(ActionCoffeeTypeEnum.SEARCH_COFFEE_BY_NAME),
           mergeMap(action => {
-            const keyWord = (action as CoffeesAction).payload.keyWord;
+            const keyWord = (action as CoffeesAction).payload;
             return this.coffeeService
               .searchCoffeeByName(keyWord)
               .pipe(

@@ -21,25 +21,36 @@
         <ng-container *ngSwitchCase="coffeeStatEnum.SUCCESS">
           <div>
             <table class="table container-sm">
-              <tr>
-                <th>name</th>
-                <th>price</th>
-                <th>quantity</th>
-                <th>selected</th>
-                <th>available</th>
-              </tr>
-              <app-coffee-item
+
+                <div >
+                  <ul>
+                    <app-card *ngFor="let coffee of coffeeState.coffee"
+                              [title]="coffee.name"
+                              [subTitle]="'sub title'"
+                              [description]="'description'"
+                              [organisation]="'organisation'"
+                              [price]="coffee.price"
+                              [startdate]="'startdate'">
+
+                    </app-card>
+                  </ul>
+
+                </div>
+
+              <!--<app-coffee-item
                 style="display: contents"
                 *ngFor="let coffee of coffeeState.coffee"
                 [coffee]="coffee">
-              </app-coffee-item>
+              </app-coffee-item>-->
             </table>
-          </div>
-          <div>
-            <app-pagination></app-pagination>
           </div>
         </ng-container>
       </ng-container>
     </div>
   </ul>
 </div>
+
+<app-pagination></app-pagination>
+
+
+

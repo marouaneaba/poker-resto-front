@@ -2,6 +2,8 @@ import { NgModule } from '@angular/core';
 import {PokerRestaurantHomeRoutingModule} from './poker-restaurant-home-routing.module';
 import {CommonModule} from '@angular/common';
 import {PokerRestaurantHomeComponent} from './container/poker-resto-home/poker-restaurant-home.component';
+import {MdbCarouselModule} from "mdb-angular-ui-kit";
+import {CoffeeModule} from "../coffee/coffee.module";
 
 
 @NgModule({
@@ -10,7 +12,9 @@ import {PokerRestaurantHomeComponent} from './container/poker-resto-home/poker-r
   ],
   imports: [
     PokerRestaurantHomeRoutingModule,
-    CommonModule
+    CommonModule,
+    MdbCarouselModule,
+    CoffeeModule
   ],
   providers: []
 })

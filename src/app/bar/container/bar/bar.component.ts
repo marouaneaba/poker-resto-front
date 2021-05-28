@@ -7,9 +7,10 @@ import { Component, OnInit } from '@angular/core';
 })
 export class BarComponent implements OnInit {
 
-  constructor() { }
+  constructor() { console.log("bar");}
 
   ngOnInit(): void {
+    console.log("bar");
   }
 
 }

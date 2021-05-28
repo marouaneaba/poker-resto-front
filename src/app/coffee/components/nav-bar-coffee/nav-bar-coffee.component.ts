@@ -29,9 +29,4 @@ export class NavBarCoffeeComponent implements OnInit {
     this.store
       .dispatch(new CoffeesAction(ActionCoffeeTypeEnum.GET_AVAILABLE_COFFEES, {}));
   }
-
-  onSearchCoffeeByName(keyWord: string) {
-    this.store
-      .dispatch(new CoffeesAction(ActionCoffeeTypeEnum.SEARCH_COFFEE_BY_NAME, '{keyWord}'));
-  }
 }

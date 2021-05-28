@@ -29,10 +29,11 @@ import {createCustomElement} from '@angular/elements';
     ReactiveFormsModule,
     StoreModule.forRoot({coffeeState: coffeeReducer}), // Inject Reducer
     EffectsModule.forRoot([EffectsCoffee]), // Inject effects
-    StoreDevtoolsModule.instrument() // Each ngrx event the chrome plugin will be notified
+    StoreDevtoolsModule.instrument(), // Each ngrx event the chrome plugin will be notified
   ],
   providers: [],
-  exports: [],
+  exports: [
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule {
