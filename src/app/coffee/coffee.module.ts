@@ -9,6 +9,9 @@ import { NavBarCoffeeComponent } from './components/nav-bar-coffee/nav-bar-coffe
 import { CoffeeListComponent } from './components/coffee-list/container/coffee-list.component';
 import { CoffeeItemComponent } from './components/coffee-list/components/coffee-item/coffee-item.component';
 import { PaginationComponent } from './components/pagination/pagination.component';
+import {AppModule} from "../core/containers/app.module";
+import {CardComponent} from "../common/components/card/card.component";
+import {FilterComponent} from "../common/components/filter/filter.component";
 
 
 
@@ -21,7 +24,9 @@ import { PaginationComponent } from './components/pagination/pagination.componen
     NavBarCoffeeComponent,
     CoffeeListComponent,
     CoffeeItemComponent,
-    PaginationComponent
+    PaginationComponent,
+    CardComponent,
+    FilterComponent
   ],
   imports: [
     CoffeeRoutingModule,
