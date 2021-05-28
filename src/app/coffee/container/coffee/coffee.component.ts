@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {CoffeeService} from '../../../common/service/Coffee.service';
+import {CoffeeService} from '../../../shared/service/Coffee.service';
 import {Observable} from 'rxjs';
 import {Store} from '@ngrx/store';
 import {CoffeeState} from '../../nrgx/Reducer.coffee';

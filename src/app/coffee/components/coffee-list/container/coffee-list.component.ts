@@ -1,6 +1,8 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {Observable} from 'rxjs';
 import {CoffeeState, CoffeeStatEnum} from '../../../nrgx/Reducer.coffee';
+import {ActionCoffeeTypeEnum, CoffeesAction} from '../../../nrgx/Coffee.action';
+import {Store} from '@ngrx/store';
 
 @Component({
   selector: 'app-coffee-list',
@@ -13,7 +15,14 @@ export class CoffeeListComponent implements OnInit {
   public coffees$: Observable<CoffeeState>;
   readonly coffeeStatEnum = CoffeeStatEnum;
 
-  constructor() {}
+  constructor(private store: Store<any>) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.fetchCoffees();
+  }
+
+  public fetchCoffees(){
+    this.store
+      .dispatch(new CoffeesAction(ActionCoffeeTypeEnum.GET_ALL_COFFEES, {}));
+  }
 }
