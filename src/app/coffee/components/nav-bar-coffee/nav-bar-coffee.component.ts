@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {CoffeeService} from '../../../common/service/Coffee.service';
+import {CoffeeService} from '../../../shared/service/Coffee.service';
 import {Store} from '@ngrx/store';
 import {ActionCoffeeTypeEnum, CoffeesAction} from '../../nrgx/Coffee.action';
 
@@ -28,10 +28,5 @@ export class NavBarCoffeeComponent implements OnInit {
   public onGetAvailableCoffee() {
     this.store
       .dispatch(new CoffeesAction(ActionCoffeeTypeEnum.GET_AVAILABLE_COFFEES, {}));
-  }
-
-  onSearchCoffeeByName(keyWord: string) {
-    this.store
-      .dispatch(new CoffeesAction(ActionCoffeeTypeEnum.SEARCH_COFFEE_BY_NAME, '{keyWord}'));
   }
 }

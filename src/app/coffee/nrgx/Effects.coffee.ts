@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {CoffeeService} from '../../common/service/Coffee.service';
+import {CoffeeService} from '../../shared/service/Coffee.service';
 import {Actions, createEffect, ofType} from '@ngrx/effects';
 import {Observable, of} from 'rxjs';
 import {Action} from '@ngrx/store';
@@ -72,7 +72,7 @@ export class EffectsCoffee {
         .pipe(
           ofType(ActionCoffeeTypeEnum.SEARCH_COFFEE_BY_NAME),
           mergeMap(action => {
-            const keyWord = (action as CoffeesAction).payload.keyWord;
+            const keyWord = (action as CoffeesAction).payload;
             return this.coffeeService
               .searchCoffeeByName(keyWord)
               .pipe(

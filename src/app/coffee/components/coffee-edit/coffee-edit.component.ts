@@ -1,12 +1,12 @@
 import {Component, OnInit} from '@angular/core';
-import {CoffeeService} from '../../../common/service/Coffee.service';
+import {CoffeeService} from '../../../shared/service/Coffee.service';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {ActivatedRoute, Router} from '@angular/router';
 import {Coffee} from '../../model/coffee.model';
 import {Store} from '@ngrx/store';
 import {ActionCoffeeTypeEnum, CoffeesAction} from '../../nrgx/Coffee.action';
 import {CoffeeStatEnum} from '../../nrgx/Reducer.coffee';
-import {EndPoint} from '../../../common/utils/EndPoint';
+import {EndPoint} from '../../../shared/utils/EndPoint';
 
 
 @Component({

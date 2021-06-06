@@ -5,7 +5,15 @@
 export const environment = {
   production: false,
   host: 'http://localhost:3000',
-  paginationFeature: false,
+  paginationFeature: true
+};
+
+export const imageNavbar =  {
+    index: 'index-image.png',
+    restaurant: 'index-image.png',
+    bar: 'index-image.png',
+    coffee: 'index-image.png',
+    beer: 'index-image.png'
 };
 
 /*

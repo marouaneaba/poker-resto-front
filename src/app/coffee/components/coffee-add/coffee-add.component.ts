@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {CoffeeService} from '../../../common/service/Coffee.service';
+import {CoffeeService} from '../../../shared/service/Coffee.service';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {ActionCoffeeTypeEnum, CoffeesAction} from '../../nrgx/Coffee.action';
 import {Store} from '@ngrx/store';

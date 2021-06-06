@@ -9,6 +9,10 @@ import { NavBarCoffeeComponent } from './components/nav-bar-coffee/nav-bar-coffe
 import { CoffeeListComponent } from './components/coffee-list/container/coffee-list.component';
 import { CoffeeItemComponent } from './components/coffee-list/components/coffee-item/coffee-item.component';
 import { PaginationComponent } from './components/pagination/pagination.component';
+import {CardComponent} from '../shared/components/card/card.component';
+import {FilterComponent} from '../shared/components/filter/filter.component';
+import {SharedModule} from '../shared/shared.module';
+import {CoffeeHeaderComponent} from './components/coffee-header/coffee-header.component';
 
 
 
@@ -21,13 +25,19 @@ import { PaginationComponent } from './components/pagination/pagination.componen
     NavBarCoffeeComponent,
     CoffeeListComponent,
     CoffeeItemComponent,
-    PaginationComponent
+    PaginationComponent,
+    CardComponent,
+    FilterComponent,
+    CoffeeHeaderComponent
+  ],
+  exports: [
   ],
   imports: [
     CoffeeRoutingModule,
     CommonModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    SharedModule
   ]
 })
 export class CoffeeModule { }

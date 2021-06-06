@@ -1,11 +1,11 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {Coffee} from '../../../../model/coffee.model';
 import {Router} from '@angular/router';
-import {CoffeeService} from '../../../../../common/service/Coffee.service';
+import {CoffeeService} from '../../../../../shared/service/Coffee.service';
 import {AlertDisplay} from '../../../../alert/AlertDisplay';
 import {Store} from '@ngrx/store';
 import {ActionCoffeeTypeEnum, CoffeesAction} from '../../../../nrgx/Coffee.action';
-import {EndPoint} from '../../../../../common/utils/EndPoint';
+import {EndPoint} from '../../../../../shared/utils/EndPoint';
 
 @Component({
   selector: 'app-coffee-item',
