@@ -8,12 +8,12 @@ export const environment = {
   paginationFeature: true
 };
 
-export const imageNavbar =  {
-    index: 'index-image.png',
-    restaurant: 'index-image.png',
-    bar: 'index-image.png',
-    coffee: 'index-image.png',
-    beer: 'index-image.png'
+export const map =  {
+    zoom: 12,
+    latitude: 50.629250,
+    longitude: 3.057256,
+    maxZoom: 15,
+    minZoom: 8
 };
 
 /*
