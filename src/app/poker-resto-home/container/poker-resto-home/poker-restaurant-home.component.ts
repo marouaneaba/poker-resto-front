@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import {LocationMap} from '../../../shared/model/location/LocationMap.model';
+import {MapService} from '../../../shared/service/Map.service';
 
 @Component({
   selector: 'app-poker-restaurant-home',
@@ -7,9 +9,19 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PokerRestaurantHomeComponent implements OnInit {
 
-  constructor() { }
+  zoom: number;
+  center: LocationMap;
+  options: google.maps.MapOptions;
+
+  constructor(private mapService: MapService) { }
 
   ngOnInit(): void {
+    this.zoom = this.mapService.getDefaultZoom();
+    this.options = this.mapService.buildMapOption();
+    this.center = this.mapService.getDefaultLocation();
+
   }
+
+
 
 }

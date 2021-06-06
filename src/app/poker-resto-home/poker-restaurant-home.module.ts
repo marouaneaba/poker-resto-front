@@ -5,6 +5,7 @@ import {MdbCarouselModule} from 'mdb-angular-ui-kit';
 import { CarouselComponent } from './components/carousel/carousel.component';
 import { ProductsHomeIndexComponent } from './components/products-home-index/products-home-index.component';
 import {SharedModule} from '../shared/shared.module';
+import {GoogleMapsModule} from '@angular/google-maps';
 
 
 @NgModule({
@@ -16,7 +17,8 @@ import {SharedModule} from '../shared/shared.module';
   imports: [
     PokerRestaurantHomeRoutingModule,
     MdbCarouselModule,
-    SharedModule
+    SharedModule,
+    GoogleMapsModule
   ],
   providers: []
 })
